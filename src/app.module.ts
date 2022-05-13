@@ -12,7 +12,7 @@ import { ReportEntity } from './reports/enitity/report.entity';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '78626458',
+      password: 'root',
       database: 'my_car_value',
       entities: [UserEntity, ReportEntity],
       synchronize: true,
