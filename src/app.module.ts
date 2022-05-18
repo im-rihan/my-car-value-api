@@ -12,7 +12,7 @@ import { ReportEntity } from './reports/enitity/report.entity';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
+      password: '78626458',
       database: 'my_car_value',
       entities: [UserEntity, ReportEntity],
       synchronize: true,
@@ -21,4 +21,4 @@ import { ReportEntity } from './reports/enitity/report.entity';
     ReportsModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }

@@ -27,7 +27,7 @@ export class UsersController {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
-  ) {}
+  ) { }
 
   @Post('signup')
   async signUp(@Body() body: CreateUserDto, @Session() session: any) {
