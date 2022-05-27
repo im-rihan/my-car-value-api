@@ -14,29 +14,7 @@ const cookieSession = require('cookie-session');
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => {
-        return {
-          type: 'mysql',
-          username: 'root',
-          password: config.get<string>('DB_PASSWORD'),
-          database: config.get<string>('DB_NAME'),
-          synchronize: true,
-          entities: [UserEntity, Report],
-        };
-      },
-    }),
-    // TypeOrmModule.forRoot({
-    //   type: 'mysql',
-    //   host: 'localhost',
-    //   port: 3306,
-    //   username: 'root',
-    //   password: '78626458',
-    //   database: 'my_car_value',
-    //   entities: [UserEntity, ReportEntity],
-    //   synchronize: true,
-    // }),
+    TypeOrmModule.forRoot(),
     UsersModule,
     ReportsModule,
   ],
@@ -46,9 +24,15 @@ const cookieSession = require('cookie-session');
   }]
 })
 export class AppModule {
+  constructor(private configService: ConfigService) { }
+
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(cookieSession({
-      keys: ['asdfg'],
-    })).forRoutes("*")
+    consumer
+      .apply(
+        cookieSession({
+          keys: [this.configService.get('COOKIE_KEY')],
+        }),
+      )
+      .forRoutes('*');
   }
 }
